@@ -9,7 +9,7 @@ import {
   kursoversiktApiProxy,
   metrikkerProxy,
 } from "./proxyMiddlewares";
-import { backendApiProxyMock } from "./local/proxyMiddlewareMock";
+import { backendApiProxyMock } from "./proxyMiddlewareMock";
 import RateLimit from "express-rate-limit";
 import { QbrickNoPreloadConfig } from "./config/qbrickConfigNoPreload";
 import morgan from "morgan";
