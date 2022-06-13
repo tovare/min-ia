@@ -18,7 +18,6 @@ COPY server/local/testdata.ts server/local/testdata.ts
 COPY server/local/testdata-kurs.ts server/local/testdata-kurs.ts
 COPY server/idporten.ts server/idporten.ts
 COPY server/tokenx.ts server/tokenx.ts
-COPY server/middleware/requestCorrelationMiddleware.ts server/middleware/requestCorrelationMiddleware.ts
 
 WORKDIR /home/node/app/server
 RUN yarn install --frozen-lockfile
