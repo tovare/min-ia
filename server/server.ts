@@ -13,7 +13,7 @@ import { backendApiProxyMock } from "./local/proxyMiddlewareMock";
 import RateLimit from "express-rate-limit";
 import { QbrickNoPreloadConfig } from "./config/qbrickConfigNoPreload";
 import morgan from "morgan";
-import { randomUUID } from "crypto";
+import { requestCorrelationMiddleware } from "./middleware/requestCorrelationMiddleware";
 
 const logKibanaFriendly = (
   level: string,
@@ -44,15 +44,6 @@ const createLogger = (correlationId?: string) => {
 };
 const kibanaLogger = createLogger();
 
-function skipRequestLogging(req: Request) {
-  const url = req.originalUrl;
-  return url?.includes("/internal/");
-}
-
-const isProduction = () => {
-  return process.env.NODE_ENV === "production";
-};
-
 morgan.token("kibana-friendly", (req, res) => {
   return JSON.stringify({
     level: "",
@@ -63,48 +54,6 @@ const basePath = "/min-ia";
 kibanaLogger.info("NODE_ENV" + process.env.NODE_ENV);
 
 const server = express();
-
-const getCorrelationIdHeader = (req: Request) => {
-  return req.headers["X-Correlation-ID"];
-};
-
-const addCorrelationIdHeader = (req: Request) => {
-  console.log("LOGGING SKIPPES")
-  req.headers["X-Correlation-ID"] = randomUUID();
-};
-
-const noCorrelationIdHeaderExists = (req): boolean => {
-  return getCorrelationIdHeader(req) === undefined;
-};
-
-const correlationIdMiddleware = (req: Request, res, next) => {
-  if (noCorrelationIdHeaderExists(req)) {
-    addCorrelationIdHeader(req);
-  }
-  next();
-};
-
-server.use(correlationIdMiddleware);
-server.use(
-  morgan(
-    (tokens, req, res) => {
-      return JSON.stringify({
-        level: "info",
-        message: [
-          tokens.method(req, res),
-          tokens.url(req, res),
-          tokens.status(req, res),
-          tokens.res(req, res, "content-length"),
-          "-",
-          tokens["response-time"](req, res),
-          "ms",
-        ].join(" "),
-        correlationId: getCorrelationIdHeader(req),
-      });
-    },
-    { skip: skipRequestLogging }
-  )
-);
 
 const prometheus = promBundle({
   includePath: true,
@@ -140,6 +89,7 @@ const startServer = async () => {
   // server.use(loggingMiddleware);
   server.use(cookieParser());
   server.use(prometheus);
+  server.use(requestCorrelationMiddleware);
   kibanaLogger.info("Starting server: server.js");
   // TODO: Samle alle kodesnutter som krever process.env.NODE_ENV === "production"
 
