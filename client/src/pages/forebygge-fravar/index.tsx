@@ -1,10 +1,10 @@
-import { PageProps } from "../pageProps";
-import { Forside } from "../Forside/Forside";
+import { PageProps } from "../../pageProps";
+import { Forside } from "../../Forside/Forside";
 import * as Sentry from "@sentry/browser";
-import { Innloggingsside } from "../Innlogginsside/Innloggingsside";
-import { useAltinnOrganisasjoner } from "../hooks/useAltinnOrganisasjoner";
-import { RestStatus } from "../integrasjoner/rest-status";
-import { Layout } from "../komponenter/Layout/Layout";
+import { Innloggingsside } from "../../Innlogginsside/Innloggingsside";
+import { useAltinnOrganisasjoner } from "../../hooks/useAltinnOrganisasjoner";
+import { RestStatus } from "../../integrasjoner/rest-status";
+import { Layout } from "../../komponenter/Layout/Layout";
 import Head from "next/head";
 import React from "react";
 

@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { RestStatus } from "../integrasjoner/rest-status";
-import { PageProps } from "../pageProps";
-import { useAltinnOrganisasjoner } from "../hooks/useAltinnOrganisasjoner";
+import { RestStatus } from "../../integrasjoner/rest-status";
+import { PageProps } from "../../pageProps";
+import { useAltinnOrganisasjoner } from "../../hooks/useAltinnOrganisasjoner";
 import { GetServerSideProps } from "next";
-import { useAggregertStatistikk } from "../hooks/useAggregertStatistikk";
-import { Innloggingsside } from "../Innlogginsside/Innloggingsside";
-import styles from "../Nettkurs/Nettkurs.module.scss";
+import { useAggregertStatistikk } from "../../hooks/useAggregertStatistikk";
+import { Innloggingsside } from "../../Innlogginsside/Innloggingsside";
+import styles from "../../Nettkurs/Nettkurs.module.scss";
 import { Button, Heading } from "@navikt/ds-react";
-import { QbrickVideoPlayer } from "../EmbeddedVideoPlayer/QbrickVideoPlayer";
-import { IAVideoer, QbrickVideo, Tags } from "../utils/nettkurs-utils";
+import { QbrickVideoPlayer } from "../../EmbeddedVideoPlayer/QbrickVideoPlayer";
+import { IAVideoer, QbrickVideo, Tags } from "../../utils/nettkurs-utils";
 import { setBreadcrumbs } from "@navikt/nav-dekoratoren-moduler";
 import Script from "next/script";
-import { NavIkon } from "../Nettkurs/ikoner/NavIkon";
-import Kurskalender from "../Nettkurs/Kurskalender/Kurskalender";
-import { Layout } from "../komponenter/Layout/Layout";
-import { sendNettkursFilterValgtEvent } from "../amplitude/events";
-import { useSendIaTjenesteMetrikkOnEvent } from "../hooks/useSendIaTjenesteMetrikkOnEvent";
-import { IaTjeneste } from "../integrasjoner/ia-tjenestemetrikker-api";
+import { NavIkon } from "../../Nettkurs/ikoner/NavIkon";
+import Kurskalender from "../../Nettkurs/Kurskalender/Kurskalender";
+import { Layout } from "../../komponenter/Layout/Layout";
+import { sendNettkursFilterValgtEvent } from "../../amplitude/events";
+import { useSendIaTjenesteMetrikkOnEvent } from "../../hooks/useSendIaTjenesteMetrikkOnEvent";
+import { IaTjeneste } from "../../integrasjoner/ia-tjenestemetrikker-api";
 
 interface ListeElement {
   key: Tags;
@@ -70,7 +70,10 @@ export default function VideoOgKurs(props: { page: PageProps }) {
             className={styles.nettkurs__knapp}
             onClick={() => {
               document.dispatchEvent(new CustomEvent("forcePausePlayer"));
-              sendNettkursFilterValgtEvent(toggleFilter.key, toggleFilter.tekst);
+              sendNettkursFilterValgtEvent(
+                toggleFilter.key,
+                toggleFilter.tekst
+              );
               toggleFilters(toggleFilter.key);
             }}
           >
@@ -145,11 +148,11 @@ export default function VideoOgKurs(props: { page: PageProps }) {
     setBreadcrumbs([
       {
         title: "Forebygge fravær",
-        url: "/min-ia",
+        url: "/forebygge-fravar",
       },
       {
         title: "Video og kurs",
-        url: "/min-ia/video-og-kurs",
+        url: "/forebygge-fravar/video-og-kurs",
       },
     ]);
   }, []);

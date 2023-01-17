@@ -4,7 +4,7 @@ const csp = require("./src/csp");
 
 const nextConfig = {
   reactStrictMode: true,
-  basePath: "/min-ia",
+  basePath: "",
   serverRuntimeConfig: {
     decoratorUrl: process.env.DECORATOR_URL,
     decoratorBreadcrumbThisPageUrl:
@@ -27,51 +27,61 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/qbrick/config/no-preload",
-        destination: "http://localhost:3010/min-ia/qbrick/config/no-preload",
+        source: "/forebygge-fravar/qbrick/config/no-preload",
+        destination:
+          "http://localhost:3010/forebygge-fravar/qbrick/config/no-preload",
       },
       {
-        source: "/internal/isAlive",
-        destination: "http://localhost:3010/min-ia/internal/isAlive",
+        source: "/forebygge-fravar/internal/isAlive",
+        destination: "http://localhost:3010/forebygge-fravar/internal/isAlive",
       },
       {
-        source: "/internal/isReady",
-        destination: "http://localhost:3010/min-ia/internal/isReady",
+        source: "/forebygge-fravar/internal/isReady",
+        destination: "http://localhost:3010/forebygge-fravar/internal/isReady",
       },
       {
-        source: "/internal/metrics",
-        destination: "http://localhost:3010/min-ia/internal/metrics",
+        source: "/forebygge-fravar/internal/metrics",
+        destination: "http://localhost:3010/forebygge-fravar/internal/metrics",
       },
       {
-        source: "/api/:slug*",
-        destination: "http://localhost:3010/min-ia/api/:slug*",
+        source: "/forebygge-fravar/api/:slug*",
+        destination: "http://localhost:3010/forebygge-fravar/api/:slug*",
       },
       {
-        source: "/redirect-til-login:slug*",
-        destination: "http://localhost:3010/min-ia/redirect-til-login:slug*",
+        source: "/forebygge-fravar/redirect-til-login:slug*",
+        destination:
+          "http://localhost:3010/forebygge-fravar/redirect-til-login:slug*",
       },
       {
-        source: "/success:slug*",
-        destination: "http://localhost:3010/min-ia/success:slug*",
+        source: "/forebygge-fravar/success:slug*",
+        destination: "http://localhost:3010/forebygge-fravar/success:slug*",
       },
       {
-        source: "/kursoversikt/:slug*",
-        destination: "http://localhost:3010/min-ia/kursoversikt/:slug*",
+        source: "/forebygge-fravar/kursoversikt/:slug*",
+        destination:
+          "http://localhost:3010/forebygge-fravar/kursoversikt/:slug*",
       },
       {
-        source: "/metrikker/:slug*",
-        destination: "http://localhost:3010/min-ia/metrikker/:slug*",
+        source: "/forebygge-fravar/metrikker/:slug*",
+        destination: "http://localhost:3010/forebygge-fravar/metrikker/:slug*",
       },
     ];
   },
   async redirects() {
     return [
       {
-        source: '/nettkurs',
-        destination: '/video-og-kurs',
+        source: "/forebygge-fravar/nettkurs",
+        destination: "/forebygge-fravar/video-og-kurs",
+        basePath: false,
         permanent: true,
       },
-    ]
+      {
+        source: "/min-ia/:path*",
+        destination: "/forebygge-fravar/:path*",
+        basePath: false,
+        permanent: true,
+      },
+    ];
   },
   async headers() {
     return [

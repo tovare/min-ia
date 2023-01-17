@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import VideoOgKurs from "../../src/pages/video-og-kurs";
+import VideoOgKurs from "../../src/pages/forebygge-fravar/video-og-kurs";
 import logEvent from "../../src/amplitude/logEvent";
 
 jest.mock("../../src/amplitude/logEvent");
@@ -34,7 +34,7 @@ it("sender nettkurs-filter-valgt-event ved klikk på Psykisk helse-filter", asyn
   expect(logEvent).toBeCalledTimes(1);
   expect(logEvent).toHaveBeenCalledWith("chip valgt", {
     chipId: knappetekst,
-    tekst: knappetekst
+    tekst: knappetekst,
   });
 });
 

@@ -1,16 +1,16 @@
-import { PageProps } from "../pageProps";
+import { PageProps } from "../../pageProps";
 import {
   erFerdigNedlastet,
   erIkkeFerdigLastet,
   erIkkeInnlogget,
-} from "../integrasjoner/rest-status";
-import { Fraværskalulator } from "../komponenter/Kalkulator/Kalkulator";
-import { useAggregertStatistikk } from "../hooks/useAggregertStatistikk";
-import { useAltinnOrganisasjoner } from "../hooks/useAltinnOrganisasjoner";
-import { hentUtKalkulatorData } from "../komponenter/Kalkulator/datauthenting";
-import { Innloggingsside } from "../Innlogginsside/Innloggingsside";
-import { tomtDataobjekt } from "../integrasjoner/aggregert-statistikk-api";
-import { Layout } from "../komponenter/Layout/Layout";
+} from "../../integrasjoner/rest-status";
+import { Fraværskalulator } from "../../komponenter/Kalkulator/Kalkulator";
+import { useAggregertStatistikk } from "../../hooks/useAggregertStatistikk";
+import { useAltinnOrganisasjoner } from "../../hooks/useAltinnOrganisasjoner";
+import { hentUtKalkulatorData } from "../../komponenter/Kalkulator/datauthenting";
+import { Innloggingsside } from "../../Innlogginsside/Innloggingsside";
+import { tomtDataobjekt } from "../../integrasjoner/aggregert-statistikk-api";
+import { Layout } from "../../komponenter/Layout/Layout";
 import { useEffect } from "react";
 import { setBreadcrumbs } from "@navikt/nav-dekoratoren-moduler";
 import Head from "next/head";
@@ -31,11 +31,11 @@ export default function Kalkulator(props: { page: PageProps }) {
     setBreadcrumbs([
       {
         title: "Forebygge fravær",
-        url: "/min-ia",
+        url: "/forebygge-fravar",
       },
       {
         title: "Fraværskalkulator",
-        url: "/min-ia/kalkulator",
+        url: "/forebygge-fravar/kalkulator",
       },
     ]);
   }, []);
